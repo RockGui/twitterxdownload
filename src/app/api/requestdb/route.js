@@ -13,11 +13,21 @@ const HiddenScreenNames = [
 ]
 
 export async function GET(request) {
+  const { searchParams } = new URL(request.url);
+  const action = searchParams.get('action');
+  
+  if(process.env.NEXT_PUBLIC_USE_SHARED_DB=='1'){
+    const response = await fetch(`https://api.twitterxdownload.com/api/requestdb?${action?`action=${action}`:''}`);
+    const data = await response.json();
+    
+    return Response.json({
+      message: 'from shared database',
+      ...data
+    });
+  }
+
   try {
     await dbConnect();
-    
-    const { searchParams } = new URL(request.url);
-    const action = searchParams.get('action');
 
     const baseFilter = {
         screen_name: { $nin: HiddenScreenNames }
@@ -42,7 +52,10 @@ export async function GET(request) {
       ]);
       allData = result[0].data;
       count = result[0].count[0]?.total || 0;
-    } else if (action === 'random') {
+    } else if (action === 'all') {
+      allData = await Tweets.find({ ...baseFilter,is_hidden: { $ne: 1 }, tweet_media: { $ne: null, $ne: '' } }).select('tweet_id post_at');
+      count = allData.length;
+    }else if (action === 'random') {
       allData = await Tweets.aggregate([
         { $match: baseFilter },
         { $sample: { size: 10 } }
