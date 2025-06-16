@@ -9,11 +9,13 @@ export default function MyFooter({ locale = 'en' }) {
         <div className="page-container p-10 flex justify-between">
             <div className="flex flex-col gap-2 w-1/3">
                 <div className="flex items-center gap-1">
-                    <p className="text-xl font-bold mb-2 w-fit">{t('TwitterXDownload')}</p>
-                    <Link href="https://github.com/ezshine/twitterxdownload" target="_blank"><Chip color="danger" size="sm" variant="flat" className="ml-2 -mt-1.5">v{process.env.APP_VERSION}</Chip></Link>
+                    <p className="text-xl font-bold mb-2 w-fit">{t('TweetXPro')}</p>
+                    <Link href="https://github.com/RockGui/twitterxdownload" target="_blank"><Chip color="danger" size="sm" variant="flat" className="ml-2 -mt-1.5">v{process.env.APP_VERSION}</Chip></Link>
                 </div>
                 <p className="text-sm text-gray-500 mb-7">{t('The fastest and most reliable Twitter video downloader. Free to use, no registration required.')}</p>
-                <p className="text-sm text-gray-500">© 2024 <a href="https://twitterxdownload.com" target="_blank">TwitterXDownload</a> {t('All rights reserved.')}</p>
+                <div className="flex items-center">
+                    <p className="text-sm text-gray-500">© 2024 TweetXPro {t('All rights reserved.')}</p>
+                </div>
             </div>
             <div className="flex flex-col gap-4">
                 <div>
@@ -26,10 +28,10 @@ export default function MyFooter({ locale = 'en' }) {
                 </div>
             </div>
             <div className="flex flex-col gap-4">
-                <div>
+                {/* <div>
                     <p className="font-bold mb-2">{t('Contact Us')}</p>    
-                    <Link href="mailto:support@twitterxdownload.com" className="text-sm hover:text-primary">support@twitterxdownload.com</Link>
-                </div>
+                    <Link href="mailto:support@tweetxpro.com" className="text-sm hover:text-primary">support@tweetxpro.com</Link>
+                </div> */}
             </div>
         </div>
     )

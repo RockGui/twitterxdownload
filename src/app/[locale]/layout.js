@@ -9,35 +9,41 @@ import MyFooter from '../components/ui/MyFooter';
 
 
 export const metadata = {
+  metadataBase: new URL('https://tweetxpro.com'),
   title: {
-    default: 'TwitterXDownload - Free Twitter Video Downloader',
-    template: '%s | TwitterXDownload'
+    default: 'TweetXPro - Download Twitter Videos',
+    template: '%s | TweetXPro'
   },
-  description: 'Download Twitter videos and media content for free. No registration required. Fast and easy Twitter video downloader. Twitter Media Saver. Twitter X Download.',
+  description: 'Download Twitter videos, images, and GIFs easily with TweetXPro. Fast, free, and no registration required.',
   keywords: 'twitter downloader, x video downloader, twitter video download, x.com downloader',
-  authors: [{ name: 'TwitterXDownload' }],
+  authors: [{ name: 'tweetxpro' }],
   robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
-  canonical: 'https://twitterxdownload.com/',
+  canonical: 'https://tweetxpro.com/',
   openGraph: {
-    title: 'TwitterXDownload - Free Twitter Video Downloader',
-    description: 'Download Twitter videos and media content for free. No registration required.',
+    title: 'TweetXPro - Download Twitter Videos',
+    description: 'Download Twitter videos, images, and GIFs easily with TweetXPro. Fast, free, and no registration required.',
+    url: 'https://tweetxpro.com',
+    siteName: 'TweetXPro',
+    images: [
+      {
+        url: 'https://tweetxpro.com/images/og.png',
+        width: 1200,
+        height: 630,
+      }
+    ],
+    locale: 'en_US',
     type: 'website',
-    url: 'https://twitterxdownload.com',
-    siteName: 'TwitterXDownload',
-    images: [{
-      url: 'https://twitterxdownload.com/images/og.png'
-    }]
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@twitterxdownload',
-    title: 'TwitterXDownload - Free Twitter Video Downloader',
+    site: '@tweetxpro',
+    title: 'tweetxpro - Free Twitter Video Downloader',
     description: 'Download Twitter videos and media content for free. No registration required.',
-    images: ['https://twitterxdownload.com/images/og.png']
+    images: ['https://tweetxpro.com/images/og.png']
   },
   icons: {
     icon: [
-      { url: '/images/favicon.ico' },
+      { url: '/images/favicon.png' },
       { url: '/images/logo.png', sizes: '32x32', type: 'image/png' },
       { url: '/images/logo.png', sizes: '16x16', type: 'image/png' }
     ],

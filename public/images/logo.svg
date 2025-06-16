@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景圆形 -->
+  <circle cx="256" cy="256" r="240" fill="#1DA1F2"/>
+  
+  <!-- X 字母 -->
+  <path d="M160 160L352 352" stroke="white" stroke-width="48" stroke-linecap="round"/>
+  <path d="M352 160L160 352" stroke="white" stroke-width="48" stroke-linecap="round"/>
+  
+  <!-- 下载箭头 -->
+  <path d="M256 352V256" stroke="white" stroke-width="32" stroke-linecap="round"/>
+  <path d="M208 304L256 352L304 304" stroke="white" stroke-width="32" stroke-linecap="round" stroke-linejoin="round"/>
+</svg> 

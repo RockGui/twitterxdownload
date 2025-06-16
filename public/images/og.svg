@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="1200" height="630" fill="#1DA1F2"/>
+  
+  <!-- 装饰性圆形 -->
+  <circle cx="900" cy="150" r="100" fill="white" fill-opacity="0.1"/>
+  <circle cx="1000" cy="250" r="150" fill="white" fill-opacity="0.1"/>
+  <circle cx="800" cy="350" r="200" fill="white" fill-opacity="0.1"/>
+  
+  <!-- Logo -->
+  <g transform="translate(100, 165) scale(0.5)">
+    <circle cx="256" cy="256" r="240" fill="white"/>
+    <path d="M160 160L352 352" stroke="#1DA1F2" stroke-width="48" stroke-linecap="round"/>
+    <path d="M352 160L160 352" stroke="#1DA1F2" stroke-width="48" stroke-linecap="round"/>
+    <path d="M256 352V256" stroke="#1DA1F2" stroke-width="32" stroke-linecap="round"/>
+    <path d="M208 304L256 352L304 304" stroke="#1DA1F2" stroke-width="32" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  
+  <!-- 文字 -->
+  <text x="100" y="400" font-family="Arial, sans-serif" font-size="72" font-weight="bold" fill="white">TweetXPro</text>
+  <text x="100" y="480" font-family="Arial, sans-serif" font-size="36" fill="white">Download Twitter Videos with Ease</text>
+</svg> 

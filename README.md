@@ -1,10 +1,10 @@
 <div align="center">
-  <img src="https://twitterxdownload.com/images/logo.png" alt="TwitterXDownload" width="80" height="80">
-  <h1>TwitterXDownload</h1>
+  <img src="https://tweetxpro.com/images/logo.png" alt="TweetXPro" width="80" height="80">
+  <h1>TweetXPro</h1>
 </div>
 
 
-TwitterXDownload is a powerful Twitter video downloader (not only video). And it's also a marketing tool that helps you republish the content efficiently. You can translate threads with one click. 
+TweetXPro is a powerful Twitter video downloader (not only video). And it's also a marketing tool that helps you republish the content efficiently. You can translate threads with one click. 
 
 So, its perfect for content creators, marketers.
 
@@ -110,7 +110,7 @@ it's perfect designed for SEO, so you can make money with AdSense easily.
 
 If you find this project helpful, please consider giving it a star ⭐️
 
-For support, please contact me at Twitter: [@ezshine](https://x.com/intent/follow?screen_name=ezshine)
+For support, please contact me at Twitter: [@rock_gui_2025](https://x.com/intent/follow?screen_name=rock_gui_2025)
 
 ## 📄 License
 
