@@ -4,9 +4,13 @@ import Link from "next/link";
 import { parseTweetData } from "@/lib/parser";
 import ShareButtons from "@/app/components/ui/ShareButtons";
 import Explore from "@/app/components/ui/Explore";
+import { headers } from 'next/headers'
 
 async function getTweetData(slug) {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    const headersList = await headers()
+    const host = headersList.get('host')
+    const protocol = headersList.get('x-forwarded-proto') || 'http'
+    const baseUrl = `${protocol}://${host}`
     const detailResp = await fetch(`${baseUrl}/api/requestdb?action=detail&tweet_id=${slug}`);
     const data = await detailResp.json();
     const tweetData = data.data[0];
@@ -109,15 +113,15 @@ export default async function TweetDetail({params}) {
     }
 
     return (
-        <div className="page-container flex flex-row gap-6 p-4 mt-4 w-full">
+        <div className="page-container flex flex-row gap-6 p-4 mt-4 flex-wrap md:flex-nowrap w-full">
             <div className="flex flex-col flex-1 gap-4 box-border border-foreground/10 border-[1px] rounded-2xl p-8 bg-[#f8f8f8] dark:bg-foreground/5">
                 <div className="flex gap-4">
                     <div className="box-border flex-shrink-0 p-1">
-                        <Avatar disableAnimation isBordered src={tweet.profile_image} size="lg" radius="full"/>
+                        <Avatar disableAnimation isBordered src={tweet.profile_image} alt={`${tweet.name} avatar`} size="lg" radius="full"/>
                     </div>
-                    <div className="flex flex-col gap-1 pt-3 flex-1 flex-shrink-0">
-                        <h1 className="text-medium font-semibold leading-none text-default-600">{tweet.name}</h1>
-                        <p className="text-small text-default-400">@{tweet.screen_name}</p>
+                    <div className="flex flex-col gap-1 pt-3 flex-1 overflow-hidden">
+                        <h1 className="text-medium font-semibold leading-none text-default-600 overflow-hidden text-ellipsis whitespace-nowrap">{tweet.name}</h1>
+                        <p className="text-small text-default-400 overflow-hidden text-ellipsis whitespace-nowrap">@{tweet.screen_name}</p>
                     </div>
                     <div className="flex flex-col gap-2 pt-2 items-end">
                         <Button color="primary" size="sm" radius="full" asChild>
@@ -133,7 +137,7 @@ export default async function TweetDetail({params}) {
                     {getHTML()}
                 </div>
             </div>
-            <div className="flex flex-col gap-6 w-[300px] flex-shrink-0 box-border">
+            <div className="flex flex-col gap-6 w-full md:w-[300px] flex-shrink-0 box-border">
                 <div className="border-foreground/10 border-[1px] rounded-2xl p-8 bg-[#f8f8f8] dark:bg-foreground/5">
                     <div className="text-medium font-semibold">{t('Share')}</div>
                     <div className="w-full h-[1px] bg-foreground/10 mt-3"></div>
