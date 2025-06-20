@@ -11,6 +11,6 @@ export default function robots() {
         ],
         crawlDelay: 1
       },
-      sitemap: 'https://tweetxpro.com//sitemap.xml',
+      sitemap: 'https://tweetxpro.com/sitemap.xml',
     }
   }
