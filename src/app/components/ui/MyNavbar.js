@@ -28,12 +28,12 @@ export default function MyNavbar({ locale = 'en' }) {
           </p>
         </Link>
       </NavbarBrand>
-      <NavbarContent className="hidden sm:flex gap-6" justify="center">
-        <NavbarItem>
+      <NavbarContent className="hidden md:flex gap-6" justify="center">
+        {process.env.NEXT_PUBLIC_SEARCH_ENABLED != 0 && <NavbarItem>
           <Link color="foreground" href="/tweets">
           {t('Search Tweets')}
           </Link>
-        </NavbarItem>
+        </NavbarItem>}
         <NavbarItem>
           <Link color="foreground" href="/downloader">
           {t('Downloader')}
@@ -49,7 +49,7 @@ export default function MyNavbar({ locale = 'en' }) {
         </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
-        <NavbarItem>
+        <NavbarItem className="hidden md:flex">
           <LanguageSwitcher locale={locale} />
         </NavbarItem>
         <NavbarItem>

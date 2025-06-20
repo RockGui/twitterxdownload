@@ -51,7 +51,7 @@ export default function CurrentPage() {
                         <section>
                             <h2 className="text-2xl font-semibold mb-4">3. Disclaimer</h2>
                             <p className="mb-4">
-                                The materials on Tweetxpro's website are provided on an 'as is' basis. TweetXPro makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.
+                                The materials on TweetXPro's website are provided on an 'as is' basis. TweetXPro makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.
                             </p>
                             <p className="mb-4">
                                 Further, TweetXPro does not warrant or make any representations concerning the accuracy, likely results, or reliability of the use of the materials on its website or otherwise relating to such materials or on any sites linked to this site.

@@ -2,6 +2,8 @@ import "../globals.css";
 
 import GoogleAnalytics from '../components/google/GoogleAnalytics';
 import GoogleAdsense from '../components/google/GoogleAdsense';
+import UmamiAnalytics from '../components/common/UmamiAnalytics';
+
 import {Providers} from "../providers";
 
 import MyNavbar from '../components/ui/MyNavbar';
@@ -18,7 +20,9 @@ export const metadata = {
   keywords: 'twitter downloader, x video downloader, twitter video download, x.com downloader',
   authors: [{ name: 'tweetxpro' }],
   robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
-  canonical: 'https://tweetxpro.com/',
+  alternates: {
+    canonical: 'https://tweetxpro.com/',
+  },
   openGraph: {
     title: 'TweetXPro - Download Twitter Videos',
     description: 'Download Twitter videos, images, and GIFs easily with TweetXPro. Fast, free, and no registration required.',
@@ -61,6 +65,7 @@ export default function RootLayout({ children, params }) {
         <head>
             <GoogleAdsense />
             <GoogleAnalytics />
+            <UmamiAnalytics />
         </head>
         <body className="bg-background text-foreground">
             <Providers>
