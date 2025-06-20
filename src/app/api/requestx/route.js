@@ -13,7 +13,7 @@ export async function GET(request) {
     }
 
     if(process.env.NEXT_PUBLIC_USE_SHARED_DB=='1'){
-        const response = await fetch(`https://api.twitterxdownload.com/api/requestx?${tweet_id?`tweet_id=${tweet_id}`:''}`);
+        const response = await fetch(`https://tweetxpro.com/api/requestx?${tweet_id?`tweet_id=${tweet_id}`:''}`);
         const data = await response.json();
         
         return Response.json({
@@ -33,7 +33,7 @@ export async function GET(request) {
             });
         }
 
-        const response = await fetch(`https://api.twitterxdownload.com/api/requestx?tweet_id=${tweet_id}`, {
+        const response = await fetch(`https://tweetxpro.com/api/requestx?tweet_id=${tweet_id}`, {
             method: 'GET',
         });
 
