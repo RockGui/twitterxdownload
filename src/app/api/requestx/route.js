@@ -33,7 +33,7 @@ export async function GET(request) {
             });
         }
 
-        const response = await fetch(`https://tweetxpro.com/api/requestx?tweet_id=${tweet_id}`, {
+        const response = await fetch(`https://api.twitterxdownload.com/api/requestx?tweet_id=${tweet_id}`, {
             method: 'GET',
         });
 
@@ -58,7 +58,7 @@ export async function GET(request) {
         const resultTweet = respData.data.data.threaded_conversation_with_injections_v2.instructions[0].entries[0].content.itemContent.tweet_results.result;
         
         // 获取主推文数据
-        const first_tweet = resultTweet.legacy || resultTweet.tweet.legacy;
+        const first_tweet = resultTweet.legacy || resultTweet.tweet?.legacy;
         
         // 获取用户信息
         const user = resultTweet.core?.user_results?.result?.legacy || resultTweet.tweet.core?.user_results?.result?.legacy;;
@@ -92,7 +92,7 @@ export async function GET(request) {
             tweet_media = media_urls.join(',');
         }
 
-        const card = resultTweet.card || resultTweet.tweet.card;
+        const card = resultTweet.card || resultTweet.tweet?.card;
         if(card && card.legacy&&card.legacy.binding_values){
             const value = card.legacy.binding_values[0].value.string_value;
             const valueJson = JSON.parse(value);

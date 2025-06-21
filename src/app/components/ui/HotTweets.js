@@ -20,7 +20,7 @@ export default async function HotTweets({ locale = 'en' }) {
     const totalCount = tweetsData.count;
 
     const tweets = [[], [], []];
-    tweetsData.data.forEach((tweet, index) => {
+    tweetsData.data?.forEach((tweet, index) => {
         tweets[index % 3].push({
             ...tweet,
             tweet_media: tweet.tweet_media ? tweet.tweet_media.split(',') : []
