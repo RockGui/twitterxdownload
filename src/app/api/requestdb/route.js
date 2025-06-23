@@ -33,7 +33,6 @@ export async function GET(request) {
         is_hidden: { $ne: 1 }, 
         tweet_media: { $ne: null, $ne: '' }
     };
-    console.log(baseFilter)
 
     let allData;
     let count = 0;

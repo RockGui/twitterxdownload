@@ -17,7 +17,6 @@ export default async function HotCreators({ locale = 'en' }) {
     });
     const creatorsData = await creatorsResp.json();
     const creators = creatorsData.data;
-    console.log(creators, 'creators')
 
     return (
         <>
