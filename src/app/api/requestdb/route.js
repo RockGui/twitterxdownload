@@ -25,12 +25,15 @@ export async function GET(request) {
     const hiddenScreenNames = hiddenAccounts.map(account => account.screen_name).join('|');
     
     const baseFilter = {
-        screen_name: { $not: { $regex: hiddenScreenNames, $options: 'i' } },
-        name: { $not: { $regex: HIDDEN_KEYWORDS_REGEX, $options: 'i' } },
-        tweet_text: { $not: { $regex: HIDDEN_KEYWORDS_REGEX, $options: 'i' } },
+        ...(hiddenScreenNames ? { screen_name: { $not: { $regex: hiddenScreenNames, $options: 'i' } } } : {}),
+        ...(HIDDEN_KEYWORDS_REGEX ? { 
+            name: { $not: { $regex: HIDDEN_KEYWORDS_REGEX, $options: 'i' } },
+            tweet_text: { $not: { $regex: HIDDEN_KEYWORDS_REGEX, $options: 'i' } }
+        } : {}),
         is_hidden: { $ne: 1 }, 
         tweet_media: { $ne: null, $ne: '' }
     };
+    console.log(baseFilter)
 
     let allData;
     let count = 0;
