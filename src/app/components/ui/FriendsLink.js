@@ -11,11 +11,11 @@ import {
 import { getTranslation } from "@/lib/i18n";
 
 const friendsLink = [
-    // {
-    //   name: "Travel Map Video",
-    //   url: "https://travelmap.video",
-    //   icon: "https://travelmap.video/images/logo.png"
-    // },
+    {
+      name: "要饭么｜追梦者的支持站",
+      url: "https://yaofan.me/xiaobaicai",
+      icon: "/images/yaofan.png"
+    },
     // {
     //     name: "PDF Tool My",
     //     url: "https://pdftoolmy.com",
