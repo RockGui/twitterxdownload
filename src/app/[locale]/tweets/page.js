@@ -2,7 +2,7 @@
 import { Input, Select, SelectItem, Button,Spinner } from "@heroui/react";
 import { RiSearchLine } from "@remixicon/react";
 import { getTranslation } from "@/lib/i18n";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import TweetCard from "@/app/components/ui/TweetCard";
 import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/navigation";
@@ -27,6 +27,7 @@ export default function Tweets({ params: { locale } }) {
 
     const dateRanges = [
         { key: "all", label: t('All') },
+        { key: "today", label: t('Today') },
         { key: "week", label: t('Week') },
         { key: "month", label: t('Month') },
         { key: "quarter", label: t('Quarter') }
@@ -38,6 +39,7 @@ export default function Tweets({ params: { locale } }) {
     const [content_type, setContentType] = useState('all');
     const [date_range, setDateRange] = useState('all');
     const [loading, setLoading] = useState(false);
+    const [lastTweetId, setLastTweetId] = useState(null);
     const [tweets, setTweets] = useState([[], [], []]);
 
     const [shouldSearch, setShouldSearch] = useState(name || screen_name || text);
@@ -49,28 +51,39 @@ export default function Tweets({ params: { locale } }) {
         }
     }, [shouldSearch]);
 
-    const handleSearch = async () => {
-
-        if(!name.trim() && !screen_name.trim() && !text.trim()){
-            return;
-        }
-
+    const handleSearch = async ({cursor=null}={}) => {
+        if(loading) return;
         setLoading(true);
 
-        router.replace(`/tweets?name=${name}&screen_name=${screen_name}&text=${text}`);
-
-        const response = await fetch(`/api/requestdb?action=search&name=${name}&screen_name=${screen_name}&text=${text}&content_type=${content_type}&date_range=${date_range}`);
+        const response = await fetch(`/api/requestdb?action=search&name=${name}&screen_name=${screen_name}&text=${text}&content_type=${content_type}&date_range=${date_range}&cursor=${cursor}`);
         const data = await response.json();
+
+        if(data.data.length > 0) setLastTweetId(data.data[data.data.length - 1]._id);
         
-        const newTweets = [[], [], []];
-        data.data.forEach((tweet, index) => {
-            newTweets[index % 3].push({
-                ...tweet,
-                tweet_media: tweet.tweet_media ? tweet.tweet_media.split(',') : []
+        setTweets(prevTweets => {
+            let targetTweets;
+    
+            if (cursor) {
+                // 加载更多：基于现有数据
+                targetTweets = prevTweets.map(row => [...row]); // 深拷贝现有数据
+            } else {
+                // 新搜索：但不创建全新数组，而是清空现有数组
+                targetTweets = prevTweets.map(() => []); // 清空但保持数组引用
+            }
+            
+            // 添加新数据
+            data.data.forEach((tweet, index) => {
+                targetTweets[index % 3].push({
+                    ...tweet,
+                    tweet_media: tweet.tweet_media ? tweet.tweet_media.split(',') : []
+                });
             });
+            
+            return targetTweets;
         });
-        setTweets(newTweets);
         setLoading(false);
+
+        if(!cursor) router.replace(`/tweets?${name ? `name=${name}&` : ''}${screen_name ? `screen_name=${screen_name}&` : ''}${text ? `text=${text}&` : ''}`);
     }
 
     const handleClear = () => {
@@ -192,7 +205,7 @@ export default function Tweets({ params: { locale } }) {
                         <div className='w-1/2 min-w-[110px]'>
                             <Select
                                 disabled={loading}
-                                label={t('Date Range')}
+                                label={t('Post At')}
                                 variant="underlined"
                                 defaultSelectedKeys={["all"]}
                                 value={date_range}
@@ -211,15 +224,22 @@ export default function Tweets({ params: { locale } }) {
                     </div>
                 </h3>
                 {tweets.some(row => row.length > 0) ? (
-                    <div className="flex justify-between gap-5 mt-8 flex-wrap md:flex-nowrap">
-                        {tweets.map((row, index) => (
-                            <div key={index} className="w-full md:w-1/3 flex flex-col gap-5">
-                                {row.map((tweet) => (
-                                    <TweetCard locale={locale} key={tweet.tweet_id} tweet={tweet} />
-                                ))}
-                            </div>
-                        ))}
-                    </div>
+                    <>
+                        <div className="flex justify-between gap-5 mt-8 flex-wrap md:flex-nowrap">
+                            {tweets.map((row, index) => (
+                                <div key={index} className="w-full md:w-1/3 flex flex-col gap-5">
+                                    {row.map((tweet) => (
+                                        <TweetCard locale={locale} key={tweet.tweet_id} tweet={tweet} />
+                                    ))}
+                                </div>
+                            ))}
+                        </div>
+                        <div className="flex justify-center">
+                            <Button isLoading={loading} isDisabled={loading} color="primary" variant="light" size="lg" radius="xs" className="px-8 mt-4 flex-1 md:flex-none" onPress={() => handleSearch({cursor:lastTweetId})}>
+                                {t('Load More')}
+                            </Button>
+                        </div>
+                    </>
                 ) : (
                     <div className="text-center py-44 text-default-500">
                         <RiSearchLine size={48} className="mx-auto mb-4 opacity-50" />

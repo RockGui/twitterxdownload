@@ -1,8 +1,9 @@
 'use client';
 import { Input, Button } from '@heroui/react';
 import { getTranslation } from '@/lib/i18n';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import XAPI from '@/lib/xapi';
+import { RiEyeLine, RiEyeOffLine } from '@remixicon/react';
 
 export default function RePublishPanel({ locale ='en',tweets,onClose }) {
     const t = function (key) {
@@ -24,6 +25,10 @@ export default function RePublishPanel({ locale ='en',tweets,onClose }) {
     const [consumerApiKeySecret, setConsumerApiKeySecret] = useState(twitterApiConfig.consumerApiKeySecret);
     const [accessToken, setAccessToken] = useState(twitterApiConfig.accessToken);
     const [accessTokenSecret, setAccessTokenSecret] = useState(twitterApiConfig.accessTokenSecret);
+    const [consumerApiKeyHidden, setConsumerApiKeyHidden] = useState(true);
+    const [consumerApiKeySecretHidden, setConsumerApiKeySecretHidden] = useState(true);
+    const [accessTokenHidden, setAccessTokenHidden] = useState(true);
+    const [accessTokenSecretHidden, setAccessTokenSecretHidden] = useState(true);
 
     // 更新 localStorage 的辅助函数
     const updateConfig = (key, value) => {
@@ -96,6 +101,10 @@ export default function RePublishPanel({ locale ='en',tweets,onClose }) {
         setIsLoading(false);
     }
 
+    useEffect(() => {
+        showPublishNotice(t(`You will publish ${tweets.length} tweets`),'success');
+    }, [tweets]);
+
     return (
         <>
             <div className="flex flex-col gap-4">
@@ -105,11 +114,64 @@ export default function RePublishPanel({ locale ='en',tweets,onClose }) {
                 <p className="text-sm text-default-500">
                     {t('Go to https://developer.x.com to get your API keys. Free plan is Enough, your API keys will only stored in your browser.')}
                 </p>
+                <div className="flex justify-end">
+                    <Button variant="light" size="sm" onPress={() => {
+                        // open a file and read the content
+                        const file = document.createElement('input');
+                        file.type = 'file';
+                        file.accept = '.json';
+                        file.onchange = (e) => {
+                            const file = e.target.files[0];
+                            const reader = new FileReader();
+                            reader.onload = (e) => {
+                                const config = JSON.parse(e.target.result);
+                                console.log(config);
+                                if(config.consumerApiKey && config.consumerApiKeySecret && config.accessToken && config.accessTokenSecret){ 
+                                    setConsumerApiKey(config.consumerApiKey);
+                                    setConsumerApiKeySecret(config.consumerApiKeySecret);
+                                    setAccessToken(config.accessToken);
+                                    setAccessTokenSecret(config.accessTokenSecret);
+                                    updateConfig('consumerApiKey', config.consumerApiKey);
+                                    updateConfig('consumerApiKeySecret', config.consumerApiKeySecret);
+                                    updateConfig('accessToken', config.accessToken);
+                                    updateConfig('accessTokenSecret', config.accessTokenSecret);
+                                }else{
+                                    showPublishNotice(t('Invalid API keys'));
+                                }
+                            }
+                            reader.readAsText(file);
+                        }
+                        document.body.appendChild(file);
+                        file.click();
+                        document.body.removeChild(file);
+                    }}>
+                       {t('Import API keys')}
+                    </Button>
+                    <Button variant="light" size="sm" onPress={() => {
+                        // download a file with the content
+                        const file = new File([JSON.stringify({
+                            consumerApiKey,
+                            consumerApiKeySecret,
+                            accessToken,
+                            accessTokenSecret
+                        })], 'twitterApiConfig.json', { type: 'application/json' });
+                        const url = URL.createObjectURL(file);
+                        const a = document.createElement('a');  
+                        a.href = url;
+                        a.download = 'twitterApiConfig.json';
+                        a.click();
+                    }}>
+                       {t('Export API keys')}
+                    </Button>
+                </div>
                 <div className="flex flex-col gap-2">
                     <Input
                         isDisabled={isLoading}
                         label="Consumer API Key"
-                        type="text"
+                        type={consumerApiKeyHidden ? 'password' : 'text'}
+                        endContent={<Button isIconOnly variant="light" size="sm" onPress={() => setConsumerApiKeyHidden(!consumerApiKeyHidden)}>
+                            {consumerApiKeyHidden ? <RiEyeLine /> : <RiEyeOffLine />}
+                        </Button>}
                         className="w-full"
                         placeholder=""
                         value={consumerApiKey}
@@ -123,7 +185,10 @@ export default function RePublishPanel({ locale ='en',tweets,onClose }) {
                     <Input
                         isDisabled={isLoading}
                         label="Consumer API Key Secret"
-                        type="text"
+                        type={consumerApiKeySecretHidden ? 'password' : 'text'}
+                        endContent={<Button isIconOnly variant="light" size="sm" onPress={() => setConsumerApiKeySecretHidden(!consumerApiKeySecretHidden)}>
+                            {consumerApiKeySecretHidden ? <RiEyeLine /> : <RiEyeOffLine />}
+                        </Button>}
                         className="w-full"
                         placeholder=""
                         value={consumerApiKeySecret}
@@ -137,7 +202,10 @@ export default function RePublishPanel({ locale ='en',tweets,onClose }) {
                     <Input
                         isDisabled={isLoading}
                         label="Access Token"
-                        type="text"
+                        type={accessTokenHidden ? 'password' : 'text'}
+                        endContent={<Button isIconOnly variant="light" size="sm" onPress={() => setAccessTokenHidden(!accessTokenHidden)}>
+                            {accessTokenHidden ? <RiEyeLine /> : <RiEyeOffLine />}
+                        </Button>}
                         className="w-full"
                         placeholder=""
                         value={accessToken}
@@ -151,7 +219,10 @@ export default function RePublishPanel({ locale ='en',tweets,onClose }) {
                     <Input
                         isDisabled={isLoading}
                         label="Access Token Secret"
-                        type="text"
+                        type={accessTokenSecretHidden ? 'password' : 'text'}
+                        endContent={<Button isIconOnly variant="light" size="sm" onPress={() => setAccessTokenSecretHidden(!accessTokenSecretHidden)}>
+                            {accessTokenSecretHidden ? <RiEyeLine /> : <RiEyeOffLine />}
+                        </Button>}
                         className="w-full"
                         placeholder=""
                         value={accessTokenSecret}

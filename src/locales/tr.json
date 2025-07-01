@@ -78,5 +78,12 @@
   "Hide this tweet": "Bu tweeti gizle",
   "Delete this tweet": "Bu tweeti sil",
   "Hide all tweets from this account on homepage?": "Bu hesabın tüm tweetlerini ana sayfadan gizle?",
-  "Hide this account": "Bu hesabı gizle"
+  "Hide this account": "Bu hesabı gizle",
+  "Show this tweet": "Bu tweeti göster",
+  "Show this tweet on homepage?": "Bu tweeti ana sayfada göster?",
+  "Today": "Bugün",
+  "Post At": "Yayınlanma Tarihi",
+  "Import API keys": "API anahtarlarını içe aktar",
+  "Export API keys": "API anahtarlarını dışa aktar",
+  "Invalid API keys": "Geçersiz API anahtarları"
 } 
