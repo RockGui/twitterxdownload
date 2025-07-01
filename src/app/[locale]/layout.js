@@ -67,10 +67,12 @@ export default function RootLayout({ children, params }) {
             <GoogleAnalytics />
             <UmamiAnalytics />
         </head>
-        <body className="bg-background text-foreground">
+        <body className="bg-[var(--color-background)] text-[var(--color-foreground)]">
             <Providers>
                 <MyNavbar locale={locale} />
-                {children}
+                <main className="min-h-[70vh] bg-[var(--color-content)] rounded-xl shadow-md my-6 p-4 border border-[var(--color-accent)]">
+                  {children}
+                </main>
                 <MyFooter locale={locale} />
             </Providers>
         </body>
