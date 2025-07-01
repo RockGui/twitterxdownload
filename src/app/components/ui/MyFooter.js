@@ -28,10 +28,13 @@ export default function MyFooter({ locale = 'en' }) {
                 </div>
             </div>
             <div className="hidden md:flex flex-col gap-4">
-                {/* <div>
+                <div>
                     <p className="font-bold mb-2">{t('Contact Us')}</p>    
-                    <Link href="mailto:support@tweetxpro.com" className="text-sm hover:text-primary">support@tweetxpro.com</Link>
-                </div> */}
+                    <Link href="mailto:support@tweetxpro.com" className="text-sm hover:text-primary mb-4">support@tweetxpro.com</Link>
+                    <a href="https://supadr.com?utm_source=tweetxpro.com&utm_medium=badge&utm_campaign=supadr" target="_blank">
+                        <img src="https://supadr.com/api/badge/tweetxpro.com.svg?theme=blue" alt="Domain Rating for tweetxpro.com" width="280" height="64" />
+                    </a>
+                </div>
             </div>
         </div>
     )

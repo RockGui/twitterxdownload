@@ -78,5 +78,12 @@
   "Hide this tweet": "ซ่อนทวีต",
   "Delete this tweet": "ลบทวีต",
   "Hide all tweets from this account on homepage?": "ซ่อนทวีตทั้งหมดจากบัญชีนี้จากหน้าแรก?",
-  "Hide this account": "ซ่อนบัญชีนี้"
+  "Hide this account": "ซ่อนบัญชีนี้",
+  "Show this tweet": "แสดงทวีตนี้",
+  "Show this tweet on homepage?": "แสดงทวีตนี้บนหน้าแรก?",
+  "Today": "วันนี้",
+  "Post At": "เผยแพร่เมื่อ",
+  "Import API keys": "นำเข้าคีย์ API",
+  "Export API keys": "ส่งออกคีย์ API",
+  "Invalid API keys": "คีย์ APIไม่ถูกต้อง"
 } 
