@@ -26,22 +26,28 @@ export async function generateMetadata({ params }) {
     const tweet = await getTweetData(slug);
 
     const tweet_text = deleteAllUrl(tweet.tweet_text);
-    const title = tweet_text.substring(0, 50) + (tweet_text.length > 50 ? '...' : '');
-    const description = tweet_text.substring(0, 150) + (tweet_text.length > 150 ? '...' : '');
+    // const title = tweet_text.substring(0, 50) + (tweet_text.length > 50 ? '...' : '');
+    // const description = tweet_text.substring(0, 150) + (tweet_text.length > 150 ? '...' : '');
+
+    const title = tweet_text.substring(0, 50);
+    const description = tweet_text.substring(0, 150);
 
     let image = "https://tweetxpro.com/images/og.png";
-    try {
-        // 如果 tweet.tweet_media 存在,则使用 tweet.tweet_media 的第一个图片
-        const data = JSON.parse(tweet.tweet_data);
-        const resultTweet = data.data.threaded_conversation_with_injections_v2.instructions[0].entries[0].content.itemContent.tweet_results.result;
-        // 获取主推文数据
-        const first_tweet = resultTweet.legacy || resultTweet.tweet.legacy;
-        if (first_tweet.extended_entities?.media) {
-            image = first_tweet.extended_entities.media[0].media_url_https;
+    // 如果 tweet.tweet_media 存在,则使用 tweet.tweet_media 的第一个图片
+    // 获取推文数据
+    const data = JSON.parse(tweet.tweet_data);
+    let entries;
+    for (const instruction of data.data.threaded_conversation_with_injections_v2.instructions) {
+        if (instruction.entries) {
+            entries = instruction.entries;
+            break;
         }
-    } catch (error) {
-        // 如果解析失败，使用默认图片
-        console.error('Error parsing tweet data for meta:', error);
+    }
+    const resultTweet = entries[0].content.itemContent.tweet_results.result;
+    // 获取主推文数据
+    const first_tweet = resultTweet.legacy || resultTweet.tweet.legacy;
+    if (first_tweet.extended_entities?.media) {
+        image = first_tweet.extended_entities.media[0].media_url_https;
     }
     
     return {
