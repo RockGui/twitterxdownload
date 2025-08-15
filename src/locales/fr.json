@@ -126,5 +126,17 @@
   "Failed": "Échec",
   "Copy": "Copier",
   "Copied": "Copié",
-  "Blog & News": "Blog et Actualités"
-} 
+  "Blog & News": "Blog et Actualités",
+  "Invalid admin password": "Mot de passe administrateur invalide",
+  "Tweet shown successfully": "Tweet affiché avec succès",
+  "This tweet will be shown on homepage": "Ce tweet sera affiché sur la page d'accueil",
+  "Tweet hidden successfully": "Tweet masqué avec succès", 
+  "This tweet will be hidden on homepage": "Ce tweet sera masqué sur la page d'accueil",
+  "Tweet deleted successfully": "Tweet supprimé avec succès",
+  "This tweet will be deleted from database": "Ce tweet sera supprimé de la base de données",
+  "Search results may contain adult content. You must be at least 18 years old to continue.": "Les résultats de recherche peuvent contenir du contenu pour adultes. Vous devez avoir au moins 18 ans pour continuer.",
+  "Birth date": "Date de naissance",
+  "View All": "Voir Tout",
+  "Download All": "Télécharger Tout",
+  "Goto Article": "Aller à l'Article"
+}   

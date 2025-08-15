@@ -126,5 +126,17 @@
   "Failed": "Başarısız",
   "Copy": "Kopyala",
   "Copied": "Kopyalandı",
-  "Blog & News": "Blog ve Haberler"
+  "Blog & News": "Blog ve Haberler",
+  "Invalid admin password": "Geçersiz yönetici şifresi",
+  "Tweet shown successfully": "Tweet başarıyla gösterildi",
+  "This tweet will be shown on homepage": "Bu tweet ana sayfada gösterilecek",
+  "Tweet hidden successfully": "Tweet başarıyla gizlendi",
+  "This tweet will be hidden on homepage": "Bu tweet ana sayfada gizlenecek",
+  "Tweet deleted successfully": "Tweet başarıyla silindi",
+  "This tweet will be deleted from database": "Bu tweet veritabanından silinecek",  
+  "Search results may contain adult content. You must be at least 18 years old to continue.": "Arama sonuçları yetişkin içeriği içerebilir. Devam etmek için en az 18 yaşında olmalısınız.",
+  "Birth date": "Doğum Tarihi",
+  "View All": "Tümünü Gör",
+  "Download All": "Tümünü İndir",
+  "Goto Article": "Makaleye Git"
 } 
